@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snegulka</title>
+</head>
+<body>
+
+<img src="s3.png">
+<img src="s3.png">
+<img src="s3.png">
+<img src="s3.png">
+<img src="s3.png">
+
+<script src="jquery-3.2.1.min.js"></script>
+
+<script>
+    let imgs = $("img");
+
+    for(let i=0; i<imgs.length; i++){
+        $(imgs[i]).css({
+            position: "absolute",
+            top: "0px",
+            left: "0px",
+            width: "150px",
+            height: "150px"
+        });
+    }
+
+    let speeds = [8000, 6500, 5000, 4500, 4000];
+
+    $(document).click(function (event) {
+        for (let i=0; i<imgs.length; i++){
+            $(imgs[i]).animate({
+                top: event.pageY - 75,
+                left: event.pageX - 75
+            },speeds[i]);
+        }
+    });
+
+    $(document).keypress(function (e) {
+       for(let i=0; i<imgs.length; i++){
+           $(imgs[i]).animate({
+               top: "0px",
+               left: "0px"
+           }, speeds[i])
+       }
+    });
+
+
+</script>
+
+</body>
+</html>

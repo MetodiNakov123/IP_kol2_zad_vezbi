@@ -1,0 +1,92 @@
+<!-- Vtor kolokvium, 4 kopcinja left right up down i change color.
+HTML elementite trebase so js da se dodadat.
+Ima edno kvadratce na pocetok vo crvena boja. So change color se menuva,
+ako e crvena vo zelena, ako e zelena vo sina i ako e sina vo crvena.
+Mislam trebase pozicijata i bojata da se cuvaat vo cookie. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="jquery-3.2.1.min.js"></script>
+<script>
+
+    function setCookie(span){
+        document.cookie = "";
+        document.cookie = span.css("margin-top") + "," + span.css("margin-left") + "," + span.css("background");
+    }
+
+    let colors = ['green', 'blue', 'red'];
+
+    $(document).ready(function () {
+
+        let body = $('body');
+
+        body.append("<br/> <br/>");
+
+        let arrOdData = decodeURIComponent(document.cookie);
+        if (arrOdData == ""){
+            arrOdData = ["100px", "100px", "red"];
+        }
+        else{
+            arrOdData = arrOdData.split(",");
+        }
+
+        let span = $("<span></span>").css({
+            display : "inline-block",
+            width : "100px",
+            height : "50px",
+            background : arrOdData[2],
+            marginLeft : arrOdData[1],
+            marginTop : arrOdData[0]
+        }).appendTo(body);
+
+        $("<button>DOWN</button>").click(function () {
+            span.animate({
+                marginTop : "+=10px"
+            }, "fast");
+            setCookie(span)
+        }).prependTo(body);
+
+        $("<button>UP</button>").click(function () {
+            span.animate({
+                marginTop : "-=10px"
+            }, "fast");
+            setCookie(span)
+        }).prependTo(body);
+
+        $("<button>RIGHT</button>").click(function () {
+            span.animate({
+                marginLeft : "+=10px"
+            }, "fast");
+            setCookie(span)
+        }).prependTo(body);
+
+        $("<button>LEFT</button>").click(function () {
+            span.animate({
+                marginLeft : "-=10px"
+            }, "fast");
+            setCookie(span)
+        }).prependTo(body);
+
+        $("<button>COLOR</button>").click(function () {
+            if (colors.length == 0){
+                colors = ['green', 'blue', 'red'];
+            }
+            span.css({
+                background: colors.shift()
+            })
+            setCookie(span)
+        }).prependTo(body);
+    })
+
+</script>
+
+<body>
+
+
+
+</body>
+</html>

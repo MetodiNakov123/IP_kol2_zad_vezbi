@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca</title>
+    <script src="jquery-3.2.1.min.js"></script>
+</head>
+<body>
+
+<div>
+    Red: <input type="number" value="0" min="0" max="255" id="red">(0-255)
+</div>
+
+<div>
+    Green: <input type="number" value="0" min="0" max="255" id="green">(0-255)
+</div>
+
+<div>
+    Blue: <input type="number" value="0" min="0" max="255" id="blue">(0-255)
+</div>
+<br/>
+
+<input type="radio" name="ime" id="start" checked> Start
+<br/>
+<input type="radio" name="ime" id="end"> End
+<br/><br/>
+
+<div>
+    Text: <input type="text" id="text">
+</div>
+
+<br/>
+
+<button id="dodaj">Add</button> &nbsp &nbsp
+<button id="brisi">Delete</button>
+<br/>
+
+<div id="container">
+
+</div>
+<script>
+
+    let container = document.getElementById("container");
+    let start = document.getElementById("start");
+    let end = document.getElementById("end");
+
+    $(document).ready(function () {
+        $("#dodaj").click(function () {
+            let red = parseInt(document.getElementById("red").value);
+            let green = parseInt(document.getElementById("green").value);
+            let blue = parseInt(document.getElementById("blue").value);
+            let text = document.getElementById("text").value;
+
+            if(text == ""){
+                alert("Text poleto e zadolzitelno!!!");
+                return;
+            }
+
+            if (start.checked){
+                let p = document.createElement("p");
+                p.style.color = "rgb("+red+","+blue+","+green+")";
+                p.innerHTML = text;
+                $(container).prepend(p);
+            }
+            else{
+                let p = document.createElement("p");
+                p.style.color = "rgb("+red+","+blue+","+green+")";
+                p.innerHTML = text;
+                container.appendChild(p);
+            }
+
+            document.getElementById("text").value = "";
+
+        });
+
+        $("#brisi").click(function () {
+            if (start.checked){
+                container.removeChild(container.childNodes[0]);
+            }
+            else{
+                container.removeChild(container.childNodes[container.childNodes.length-1]);
+            }
+        })
+    })
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rotacija</title>
+
+    <script src="jquery-3.2.1.min.js"></script>
+
+</head>
+
+<body>
+
+<script>
+
+    let x = document.createTextNode("X: ");
+    document.body.appendChild(x);
+    let inputX = document.createElement("input");
+    inputX.setAttribute("type", "text");
+    inputX.setAttribute("id", "x");
+    document.body.appendChild(inputX);
+
+    document.body.appendChild(document.createElement("br"));
+
+
+    let y = document.createTextNode("Y: ");
+    document.body.appendChild(y);
+    let inputY = document.createElement("input");
+    inputY.setAttribute("type", "text");
+    inputY.setAttribute("id", "y");
+    document.body.appendChild(inputY);
+
+    document.body.appendChild(document.createElement("br"));
+
+
+    let rot = document.createTextNode("Rotacija: ");
+    document.body.appendChild(rot);
+    let inputRot = document.createElement("input");
+    inputRot.setAttribute("type", "text");
+    inputRot.setAttribute("id", "rotacija");
+    document.body.appendChild(inputRot);
+
+    document.body.appendChild(document.createElement("br"));
+
+
+    let toJson = document.createElement("button");
+    toJson.innerHTML = "To Json";
+    toJson.setAttribute("id", "json");
+    document.body.appendChild(toJson);
+
+    document.body.appendChild(document.createElement("br"));
+
+
+    let animate = document.createElement("button");
+    animate.innerHTML = "Animate";
+    animate.setAttribute("id", "animate");
+    document.body.appendChild(animate);
+
+    document.body.appendChild(document.createElement("br"));
+    document.body.appendChild(document.createElement("br"));
+
+
+    let div = document.createElement("div");
+    div.style.backgroundColor = "yellow";
+    div.style.position = "absolute";
+    div.style.width = "50px";
+    div.style.height = "50px";
+    //div.setAttribute("style", "height: 50px; width: 50px; background-color: yellow; position: absolute");
+    div.setAttribute("id", "dvizi");
+    document.body.appendChild(div);
+
+    $(document).ready(function () {
+        $("#animate").click(function () {
+
+            let x = document.getElementById("x").value;
+            let y = document.getElementById("y").value;
+            let rotacija = document.getElementById("rotacija").value;
+
+            if (x=="" ||  y=="" || rotacija ==""){
+                alert("Site policnja se zadolzitelni!!!");
+                return;
+            }
+
+            $("#dvizi").animate({
+                top : "+="+parseInt(x),
+                left : "+="+parseInt(y)
+            }, 2500);
+
+            $("#dvizi").css({
+                transform : "rotate(" + rotacija + "deg)"
+            })
+        });
+
+        $("#json").click(function () {
+
+            let obj = new Object();
+            obj.x = document.getElementById("x").value;
+            obj.y = document.getElementById("y").value;
+            obj.rotation = document.getElementById("rotacija").value;
+            let str = JSON.stringify(obj);
+            console.log(str);
+
+        })
+    })
+
+
+
+</script>
+
+
+</body>
+</html>
